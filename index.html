@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>校园失物招领</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎒</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="phone">
+    <div class="screen">
+
+      <!-- 首页 -->
+      <div class="page active" id="page-home">
+        <div class="topbar">
+          <div class="row">
+            <div>
+              <h1>校园失物招领</h1>
+              <div class="sub">今天也要帮物品找到主人 🎒</div>
+            </div>
+            <div class="spacer"></div>
+            <div class="icon-btn" data-noop>🔔</div>
+          </div>
+        </div>
+        <div class="scroll">
+          <div class="searchbar" data-go="search"><span class="ico">🔍</span><span class="ph">搜索物品名称、地点或描述</span></div>
+
+          <div class="cats">
+            <div class="cat type-tab on" data-type="all">全部</div>
+            <div class="cat type-tab" data-type="found">招领</div>
+            <div class="cat type-tab" data-type="lost">寻物</div>
+          </div>
+
+          <div class="chips chip-scroll" id="home-cats">
+            <div class="chip on" data-cat="all">全部类别</div>
+            <div class="chip" data-cat="生活用品">生活用品</div>
+            <div class="chip" data-cat="电子设备">电子设备</div>
+            <div class="chip" data-cat="证件卡片">证件卡片</div>
+            <div class="chip" data-cat="衣物配饰">衣物配饰</div>
+            <div class="chip" data-cat="书籍资料">书籍资料</div>
+            <div class="chip" data-cat="运动器材">运动器材</div>
+            <div class="chip" data-cat="其他">其他</div>
+          </div>
+
+          <div class="hero">
+            <div>
+              <div class="ht">丢东西别着急</div>
+              <div class="hs">已帮助 1,286 件物品回到主人手中</div>
+            </div>
+            <div class="go" data-go="publish">去发布</div>
+          </div>
+
+          <div class="sect"><h2>最新信息</h2><span class="cnt" id="home-count"></span></div>
+          <div id="home-list"></div>
+          <div class="foot">— 校园失物招领 · 数据每日更新 —</div>
+        </div>
+      </div>
+
+      <!-- 搜索页 -->
+      <div class="page" id="page-search">
+        <div class="topbar">
+          <div class="row">
+            <button class="back-btn" data-go="home">‹</button>
+            <div class="searchbar" style="margin:0;flex:1;padding:8px 12px;">
+              <span class="ico">🔍</span>
+              <input id="search-input" type="text" placeholder="搜索物品名称、地点或描述" autocomplete="off">
+            </div>
+            <button class="back-btn cancel" data-go="home">取消</button>
+          </div>
+        </div>
+        <div class="scroll">
+          <div id="search-result"></div>
+          <div id="search-default">
+            <div class="sect"><h2>热门搜索</h2><span class="cnt">近 7 天校园热搜</span></div>
+            <div class="chips" style="margin:0 16px 20px;">
+              <div class="chip" data-quick="保温杯">保温杯</div>
+              <div class="chip" data-quick="一卡通">一卡通</div>
+              <div class="chip" data-quick="耳机">耳机</div>
+              <div class="chip" data-quick="雨伞">雨伞</div>
+              <div class="chip" data-quick="钥匙">钥匙</div>
+              <div class="chip" data-quick="眼镜">眼镜</div>
+              <div class="chip" data-quick="双肩包">双肩包</div>
+              <div class="chip" data-quick="图书馆">图书馆</div>
+            </div>
+            <div class="sect"><h2>搜索历史</h2><span class="icon-btn clear" data-clear-history>✕</span></div>
+            <div class="chips" id="history-chips" style="margin:0 16px 20px;"></div>
+            <div class="tip"><b>搜索小技巧</b><br>输入地点或类别更容易找到对应信息，例如「图书馆」「证件」。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 发布页 -->
+      <div class="page" id="page-publish">
+        <div class="topbar">
+          <div class="row">
+            <button class="back-btn" data-go="home">‹</button>
+            <div>
+              <h1>发布信息</h1>
+              <div class="sub">信息越详细，越容易被同学看到</div>
+            </div>
+            <div class="spacer"></div>
+            <div class="icon-btn" style="width:auto;padding:0 10px;font-size:11px">草稿已保存</div>
+          </div>
+        </div>
+        <div class="scroll">
+          <div class="form">
+            <div class="type-switch">
+              <div class="opt on-found" id="type-found" data-ptype="found">📢 发布招领</div>
+              <div class="opt" id="type-lost" data-ptype="lost">🔍 发布寻物</div>
+            </div>
+            <div class="type-hint" id="type-hint">当前为「招领」信息：请尽量写清拾到时间与地点，便于失主辨认。</div>
+
+            <div class="field">
+              <div class="lbl">物品照片</div>
+              <div class="upload" data-noop><span class="ico">📷</span>点击上传（最多 3 张，建议实物图）</div>
+            </div>
+            <div class="field"><div class="lbl">物品名称 <span class="req">*</span></div><input id="f-name" type="text" placeholder="例如：黑色保温杯"></div>
+            <div class="field"><div class="lbl">物品类别</div>
+              <div class="chips" id="f-cats">
+                <div class="chip on" data-c="生活用品">生活用品</div>
+                <div class="chip" data-c="电子设备">电子设备</div>
+                <div class="chip" data-c="证件卡片">证件卡片</div>
+                <div class="chip" data-c="衣物配饰">衣物配饰</div>
+                <div class="chip" data-c="书籍资料">书籍资料</div>
+                <div class="chip" data-c="运动器材">运动器材</div>
+                <div class="chip" data-c="其他">其他</div>
+              </div>
+            </div>
+            <div class="field"><div class="lbl" id="f-loc-lbl">拾到地点 <span class="req">*</span></div><input id="f-loc" type="text" placeholder="例如：图书馆三楼自习区"></div>
+            <div class="field"><div class="lbl" id="f-time-lbl">拾到时间</div><input id="f-time" type="text" placeholder="如 2026-10-07 08:30（可留空）"></div>
+            <div class="field"><div class="lbl">详细描述</div><textarea id="f-desc" placeholder="描述物品特征、颜色、品牌、有无标记等，方便同学辨认"></textarea><div class="hint">小提示：描述品牌、颜色和细节标记，能显著提高找回概率。</div></div>
+            <div class="field"><div class="lbl">联系方式 <span class="req">*</span></div><input id="f-contact" type="text" placeholder="手机号 / 微信号"></div>
+          </div>
+          <div class="btn" id="publish-btn">发布信息</div>
+          <div class="foot">发布即表示你已阅读并同意《校园失物招领发布规范》</div>
+        </div>
+      </div>
+
+      <!-- 详情页 -->
+      <div class="page" id="page-detail">
+        <div class="topbar">
+          <div class="row">
+            <button class="back-btn" id="back-btn">‹</button>
+            <h1>信息详情</h1>
+            <div class="spacer"></div>
+            <div class="icon-btn" data-noop>↗</div>
+          </div>
+        </div>
+        <div class="scroll" id="detail-body"></div>
+        <div id="detail-actions" class="detail-actions"></div>
+      </div>
+
+      <!-- 我的发布 -->
+      <div class="page" id="page-mine">
+        <div class="topbar">
+          <div class="row">
+            <div>
+              <h1>我的发布</h1>
+              <div class="sub">管理你发布的每一条失物招领信息</div>
+            </div>
+            <div class="spacer"></div>
+            <div class="icon-btn" data-noop>⚙️</div>
+          </div>
+        </div>
+        <div class="scroll">
+          <div class="stats">
+            <div class="st"><div class="num" id="st-total">0</div><div class="lbl">累计发布</div></div>
+            <div class="st"><div class="num" id="st-active">0</div><div class="lbl">进行中</div></div>
+            <div class="st"><div class="num" id="st-done">0</div><div class="lbl">已完成</div></div>
+          </div>
+          <div class="cats">
+            <div class="cat on" data-mt="all">全部</div>
+            <div class="cat" data-mt="active">进行中</div>
+            <div class="cat" data-mt="done">已完成</div>
+          </div>
+          <div id="mine-list"></div>
+        </div>
+      </div>
+
+      <!-- 底部导航 -->
+      <div class="tabbar">
+        <div class="tab on" data-go="home"><span class="ico">🏠</span>首页</div>
+        <div class="tab" data-go="publish"><span class="ico">➕</span>发布</div>
+        <div class="tab" data-go="mine"><span class="ico">👤</span>我的</div>
+      </div>
+
+      <!-- 联系弹窗 -->
+      <div class="mask" id="contact-mask">
+        <div class="modal">
+          <div class="modal-ico">📞</div>
+          <h3 id="modal-name">联系发布者</h3>
+          <div class="phone-num" id="modal-contact"></div>
+          <div class="btn small" id="modal-copy" data-copy="" style="margin:0 auto">📋 复制联系方式</div>
+          <div class="btn small ghost-inline" data-close-modal style="margin:8px auto 0">知道了</div>
+        </div>
+      </div>
+
+      <div class="toast" id="toast"></div>
+    </div>
+  </div>
+
+  <script src="js/core.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
