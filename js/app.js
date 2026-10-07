@@ -262,8 +262,12 @@
       var closeEl = t.closest('[data-close-modal]');
       if (closeEl) { Render.closeContact(); return; }
 
-      var noopEl = t.closest('[data-noop]');
-      if (noopEl) { Render.toast('ℹ️', '该信息已完成，无需修改'); return; }
+      var toastEl = t.closest('[data-toast]');
+      if (toastEl) {
+        var parts = toastEl.getAttribute('data-toast').split('|');
+        Render.toast(parts[0] || 'ℹ️', parts[1] || '');
+        return;
+      }
 
       var openEl = t.closest('[data-open]');
       if (openEl) { openDetail(Number(openEl.getAttribute('data-open'))); return; }

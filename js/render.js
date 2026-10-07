@@ -120,7 +120,7 @@
       var active = Core.isActive(item);
       var mainBtn = active
         ? '<button class="btn ghost" data-markdone="' + item.id + '">✅ ' + escapeHtml(Core.doneStatus(item.type) === '已归还' ? '标记已归还' : '标记已找到') + '</button>'
-        : '<button class="btn ghost" data-noop>✅ ' + escapeHtml(item.status) + '</button>';
+        : '<button class="btn ghost" data-toast="✅|该信息已完成">✅ ' + escapeHtml(item.status) + '</button>';
       actions.innerHTML =
         '<div class="btn-row">' + mainBtn +
         '<button class="btn" data-contact="' + item.id + '">📞 联系发布者</button></div>';
@@ -152,7 +152,7 @@
     var active = Core.isActive(item);
     var action = active
       ? '<button class="btn small green" data-markdone="' + item.id + '">' + (item.type === 'found' ? '标记已归还' : '标记已找到') + '</button>'
-      : '<button class="btn small slate" data-noop>已完成，无需修改</button>';
+      : '<button class="btn small slate" data-toast="ℹ️|已完成，无需修改">已完成，无需修改</button>';
     return (
       '<div class="card" data-open="' + item.id + '" style="align-items:flex-start;flex-wrap:wrap;">' +
         '<div class="emoji">' + escapeHtml(item.emoji) + '</div>' +
